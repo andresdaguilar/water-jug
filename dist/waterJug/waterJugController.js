@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.solveWaterJug = void 0;
-const solveWaterJug = (request, response) => {
-    const { x_capacity, y_capacity, z_amount_wanted } = request.body;
+const solveWaterJug = (req, res) => {
+    const { x_capacity, y_capacity, z_amount_wanted } = req.body;
     // Input validations
     //Check if the input has all the required values
     if (!Number.isInteger(x_capacity) || !Number.isInteger(y_capacity) || !Number.isInteger(z_amount_wanted) ||
         x_capacity <= 0 || y_capacity <= 0 || z_amount_wanted < 0) {
-        return response.status(400).json({ message: "All inputs must be positive integers." });
+        return res.status(400).json({ message: "All inputs must be positive integers." });
     }
     //Check if the values are valid
     if (z_amount_wanted > x_capacity && z_amount_wanted > y_capacity) {
-        return response.status(400).json({ message: "No solution." });
+        return res.status(400).json({ message: "No solution." });
     }
     // Helper function to check if a move is valid and perform it
     const stepTest = (params) => {
@@ -37,7 +37,7 @@ const solveWaterJug = (request, response) => {
                 solution.unshift(Object.assign(Object.assign({}, step), { step: solution.length + 1 }));
                 step = steps.get(step.parent);
             }
-            return response.json({ solution });
+            return res.json({ solution });
         }
         // Generate all possible states
         // Fill X, Fill Y
@@ -53,6 +53,6 @@ const solveWaterJug = (request, response) => {
         stepTest({ newX: jugState.x + transferToX, newY: jugState.y - transferToX, action: "Transfer from bucket Y to X", queue, steps, current: jugState });
     }
     // If no solution found
-    return response.status(404).json({ message: "No solution possible." });
+    return res.status(404).json({ message: "No solution possible." });
 };
 exports.solveWaterJug = solveWaterJug;

@@ -34,7 +34,7 @@ npm start
 The API has a single endpoint that accepts POST requests. You can use this endpoint to submit the capacities of two jugs and the desired amount of water you wish to measure.
 
 Endpoint
-POST /api/water-jug
+POST localhost:3000/api/water-jug
 
 ### Payload
 
@@ -58,6 +58,12 @@ POST /api/water-jug
   ]
 }
 ```
+## API Docs
+
+```bash
+localhost:3000/api-docs
+```
+
 
 ## Solution explanation
 
