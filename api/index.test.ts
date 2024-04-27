@@ -2,12 +2,12 @@ import request from 'supertest';
 import express from 'express';
 import { solveWaterJug } from './waterJug/waterJugController';
 
-
-const mockRequest = (body: any): Request => ({
+//Had to use type any because Request type is different from the controller
+const mockRequest = (body: any): any => ({
   body,
-} as any);
+});
 
-const mockResponse = (): Response => {
+const mockResponse = (): any => {
   const res: any = {};
   res.status = jest.fn().mockReturnValue(res);
   res.json = jest.fn().mockReturnValue(res);
