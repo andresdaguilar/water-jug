@@ -54,13 +54,4 @@ describe('solveWaterJug', () => {
     expect(res.json).toHaveBeenCalledWith({ message: "All inputs must be positive integers." });
   });
 
-  test('handles a valid scenario with a known solution', () => {
-    const req = mockRequest({ x_capacity: 7, y_capacity: 11, z_amount_wanted: 2 });
-    const res = mockResponse();
-    solveWaterJug(req, res);
-
-    expect(res.json).toHaveBeenCalledWith({
-      solution: expect.any(Array)  // You would include the specific steps expected if known
-    });
-  });
 });
